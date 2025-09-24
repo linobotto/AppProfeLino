@@ -59,8 +59,7 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState()),
+                .padding(16.dp),
 
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,53 +77,57 @@ fun HomeScreen(
                 contentDescription = null
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                onClick = { navController.navigate(LeccionUno) },
-                modifier = Modifier.fillMaxWidth(),
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
-                Text(text = "1. Importación de librerias")
-            }
-            Button(
-                onClick = { navController.navigate(LeccionDos) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(text = "2. Importación de plugins")
-            }
-            Button(
-                onClick = { navController.navigate(LeccionTres) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(text = "3. Composables Boxes")
-            }
-            Button(
-                onClick = { navController.navigate(LeccionCuatro) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(text = "4. Composables Row y Column")
-            }
-            Button(
-                onClick = { navController.navigate(LeccionCinco) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(text = "5. Composable Spacer")
-            }
-            Button(
-                onClick = { navController.navigate(LeccionSeis) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(text = "6. ConstraintLayout")
-            }
-            Button(
-                onClick = { navController.navigate(LeccionSiete) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(text = "7. Estados y Recomposición")
-            }
-            Button(
-                onClick = { navController.navigate(LeccionOcho) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(text = "8. Text y TextField")
+                Button(
+                    onClick = { navController.navigate(LeccionUno) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "1. Importación de librerias")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionDos) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "2. Importación de plugins")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionTres) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "3. Composables Boxes")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionCuatro) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "4. Composables Row y Column")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionCinco) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "5. Composable Spacer")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionSeis) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "6. ConstraintLayout")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionSiete) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "7. Estados y Recomposición")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionOcho) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "8. Text y TextField")
+                }
             }
         }
     }
