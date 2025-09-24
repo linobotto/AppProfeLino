@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 
@@ -34,6 +36,8 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionUno
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionCuatro
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionCinco
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionSeis
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionSiete
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionOcho
 
 @Preview(showBackground = true)
 @Composable
@@ -55,10 +59,13 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(16.dp),
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
             Text(
                 style = MaterialTheme.typography.titleLarge,
                 text = "Catalogo de lecciones"
@@ -106,6 +113,18 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(text = "6. ConstraintLayout")
+            }
+            Button(
+                onClick = { navController.navigate(LeccionSiete) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(text = "7. Estados y Recomposición")
+            }
+            Button(
+                onClick = { navController.navigate(LeccionOcho) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(text = "8. Text y TextField")
             }
         }
     }

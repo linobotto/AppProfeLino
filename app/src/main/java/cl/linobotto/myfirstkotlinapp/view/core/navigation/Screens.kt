@@ -22,3 +22,9 @@ object LeccionCinco
 
 @Serializable
 data object LeccionSeis
+
+@Serializable
+data object LeccionSiete
+
+@Serializable
+data object LeccionOcho

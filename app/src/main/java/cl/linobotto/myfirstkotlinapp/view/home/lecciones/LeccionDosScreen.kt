@@ -54,7 +54,7 @@ fun LeccionDosScreen(navController: NavController) {
             Column() {
                 Text(
                     style = MaterialTheme.typography.titleLarge,
-                    text = "Lección 1"
+                    text = "Lección 2"
                 )
                 Image(
                     modifier = Modifier
