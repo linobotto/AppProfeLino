@@ -155,7 +155,7 @@ fun TextoBox() {
                 }
                 append(" de la interfaz de usuario")
             },
-            style = TextStyle(fontSize = 16.sp, color = Color.Black)
+            style = TextStyle(fontSize = 16.sp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
@@ -227,7 +227,7 @@ fun TextoBox() {
                 append("Los modificadores width se utilizan para establecer el ancho de un elemento de la interfaz de usuario. \n \n")
 
             },
-            style = TextStyle(fontSize = 16.sp, color = Color.Black)
+            style = TextStyle(fontSize = 16.sp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(

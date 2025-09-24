@@ -49,9 +49,13 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import cl.linobotto.myfirstkotlinapp.ui.theme.outlineDark
 
 @Composable
 fun LeccionOchoScreen(navController: NavController) {
@@ -124,6 +128,7 @@ private fun IntroTexto() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 private fun EjemplosTextVisual() {
     Column(
@@ -135,7 +140,11 @@ private fun EjemplosTextVisual() {
     ) {
         Text(
             text = "Ejemplos visuales: Text",
-            style = TextStyle(fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.SemiBold)
+            style = TextStyle(
+                fontSize = 18.sp,
+                color = Color.White,
+                fontWeight = FontWeight.SemiBold
+            )
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = "Texto simple", style = TextStyle(color = Color.White, fontSize = 16.sp))
@@ -145,7 +154,11 @@ private fun EjemplosTextVisual() {
         )
         Text(
             text = "Cursiva centrada",
-            style = TextStyle(color = Color.White, fontStyle = FontStyle.Italic, textAlign = TextAlign.Center),
+            style = TextStyle(
+                color = Color.White,
+                fontStyle = FontStyle.Italic,
+                textAlign = TextAlign.Center
+            ),
             modifier = Modifier.fillMaxWidth()
         )
         Text(
@@ -188,20 +201,59 @@ private fun BloqueCodigoTextBasico() {
     ) {
         Text(
             text = buildAnnotatedString {
-                append("// Text básico y opciones comunes\n")
                 withStyle(style = SpanStyle(fontWeight = FontWeight.SemiBold, color = Color(0xFF90CAF9))) {
                     append("@Composable\n")
                     append("fun MisTextos() {\n")
                 }
-                append("    Text(\"Hola\")\n")
-                append("    Text(\"Grande y negrita\", style = TextStyle(fontSize = 22.sp, fontWeight = FontWeight.Bold))\n")
-                append("    Text(\"Centrado\", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)\n")
-                append("    Text(\"1 línea con ellipsis muy largo...\", maxLines = 1, overflow = TextOverflow.Ellipsis)\n")
-                append("    Text(buildAnnotatedString {\n")
-                append("        append(\"Con \")\n")
-                append("        withStyle(SpanStyle(color = Color.Yellow, fontWeight = FontWeight.Bold)) { append(\"estilo\") }\n")
-                append("        append(\" parcial\")\n")
-                append("    })\n")
+                append(" Text(\n" +
+                        "            text = \"Ejemplos visuales: Text\",\n" +
+                        "            style = TextStyle(\n" +
+                        "                fontSize = 18.sp,\n" +
+                        "                color = Color.White,\n" +
+                        "                fontWeight = FontWeight.SemiBold\n" +
+                        "            )\n" +
+                        "        )\n" +
+                        "        Spacer(modifier = Modifier.height(8.dp))\n" +
+                        "        Text(text = \"Texto simple\", style = TextStyle(color = Color.White, fontSize = 16.sp))\n" +
+                        "        Text(\n" +
+                        "            text = \"Negrita y tamaño grande\",\n" +
+                        "            style = TextStyle(color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)\n" +
+                        "        )\n" +
+                        "        Text(\n" +
+                        "            text = \"Cursiva centrada\",\n" +
+                        "            style = TextStyle(\n" +
+                        "                color = Color.White,\n" +
+                        "                fontStyle = FontStyle.Italic,\n" +
+                        "                textAlign = TextAlign.Center\n" +
+                        "            ),\n" +
+                        "            modifier = Modifier.fillMaxWidth()\n" +
+                        "        )\n" +
+                        "        Text(\n" +
+                        "            text = \"Texto subrayado y espaciado\",\n" +
+                        "            style = TextStyle(\n" +
+                        "                color = Color.White,\n" +
+                        "                textDecoration = TextDecoration.Underline,\n" +
+                        "                letterSpacing = 1.sp\n" +
+                        "            )\n" +
+                        "        )\n" +
+                        "        Text(\n" +
+                        "            text = \"Máximo de una línea con puntos suspensivos al final si es muy largo...\",\n" +
+                        "            maxLines = 1,\n" +
+                        "            overflow = TextOverflow.Ellipsis,\n" +
+                        "            style = TextStyle(color = Color.White)\n" +
+                        "        )\n" +
+                        "        Spacer(modifier = Modifier.height(8.dp))\n" +
+                        "        Text(\n" +
+                        "            text = buildAnnotatedString {\n" +
+                        "                append(\"Texto con \")\n" +
+                        "                withStyle(SpanStyle(color = Color(0xFFFFC107), fontWeight = FontWeight.Bold)) {\n" +
+                        "                    append(\"estilos\")\n" +
+                        "                }\n" +
+                        "                append(\" en partes del contenido usando AnnotatedString.\")\n" +
+                        "            },\n" +
+                        "            style = TextStyle(color = Color.White)\n" +
+                        "        )\n")
+
                 append("}\n")
             },
             style = TextStyle(fontSize = 16.sp, color = Color.White)
@@ -209,6 +261,7 @@ private fun BloqueCodigoTextBasico() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 private fun EstilosTextoVisual() {
     Column(
@@ -259,6 +312,7 @@ private fun BloqueCodigoEstilosTexto() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
 private fun EjemplosTextFieldVisual() {
     var nombre by rememberSaveable { mutableStateOf("") }
@@ -279,6 +333,12 @@ private fun EjemplosTextFieldVisual() {
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedTextColor = Color.White,
+                focusedTextColor = Color.White,
+                unfocusedBorderColor = Color.White,
+                focusedBorderColor = Color.White
+            ),
             value = nombre,
             onValueChange = { nombre = it },
             label = { Text("Nombre") },
