@@ -38,6 +38,9 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionCinco
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionSeis
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionSiete
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionOcho
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionNueve
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiez
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionOnce
 
 @Preview(showBackground = true)
 @Composable
@@ -127,6 +130,24 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "8. Text y TextField")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionNueve) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "9. MVVM")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionDiez) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "10. Scaffold")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionOnce) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "11. Image e Icon")
                 }
             }
         }
