@@ -41,6 +41,7 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionOcho
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionNueve
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiez
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionOnce
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDoce
 
 @Preview(showBackground = true)
 @Composable
@@ -148,6 +149,12 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "11. Image e Icon")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionDoce) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "12. MaterialTheme, Typography y ColorScheme")
                 }
             }
         }

@@ -37,3 +37,6 @@ data object LeccionNueve
 
 @Serializable
 data object LeccionOnce
+
+@Serializable
+data object LeccionDoce

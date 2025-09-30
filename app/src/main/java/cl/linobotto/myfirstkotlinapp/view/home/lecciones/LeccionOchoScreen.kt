@@ -388,7 +388,7 @@ private fun EjemplosTextFieldVisual() {
         }
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Nombre: ${'$'}nombre\nCorreo: ${'$'}correo",
+            text = "Nombre: ${nombre}\nCorreo: ${correo}",
             style = TextStyle(color = Color.White)
         )
     }
