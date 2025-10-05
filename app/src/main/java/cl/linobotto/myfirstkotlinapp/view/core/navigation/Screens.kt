@@ -40,3 +40,10 @@ data object LeccionOnce
 
 @Serializable
 data object LeccionDoce
+
+// Lección 13: Destinos para demostrar navegación y paso de argumentos serializables
+@Serializable
+data object LeccionTrece
+
+@Serializable
+data class LeccionTreceDetalle(val nombre: String, val edad: Int)

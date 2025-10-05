@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import cl.linobotto.myfirstkotlinapp.view.home.HomeScreen
 import cl.linobotto.myfirstkotlinapp.view.home.HomeViewModel
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionCincoScreen
@@ -18,6 +19,8 @@ import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_nueve.LeccionNu
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionDiezScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionOnceScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionDoceScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionTreceScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionTreceDetalleScreen
 
 @Composable
 fun NavigationWrapper(){
@@ -87,6 +90,18 @@ fun NavigationWrapper(){
         composable <LeccionDoce> {
             LeccionDoceScreen(
                 navController = navController
+            )
+        }
+        composable <LeccionTrece> {
+            LeccionTreceScreen(
+                navController = navController
+            )
+        }
+        composable<LeccionTreceDetalle> { backStackEntry ->
+            val detalle = backStackEntry.toRoute<LeccionTreceDetalle>()
+            LeccionTreceDetalleScreen(
+                navController = navController,
+                backStackArgs = detalle
             )
         }
     }
