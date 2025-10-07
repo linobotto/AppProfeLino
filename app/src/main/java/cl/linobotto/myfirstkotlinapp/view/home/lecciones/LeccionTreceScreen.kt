@@ -94,7 +94,8 @@ fun LeccionTreceScreen(navController: NavController) {
 private fun IntroNavigation() {
     Column {
         Text(
-            text = "Navigation Compose te permite moverte entre pantallas (destinos) usando un NavController y un NavHost. En este proyecto usamos rutas tipadas con kotlinx.serialization."
+            text = "Navigation Compose te permite moverte entre pantallas (destinos) usando un NavController y un NavHost. En este proyecto usamos rutas tipadas con kotlinx.serialization." +
+                    "\n\nPrimero agreguemos lo necesario:"
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
@@ -112,6 +113,47 @@ private fun IntroNavigation() {
                     append("• @Serializable:")
                 }
                 append(" define destinos y también argumentos tipados (data class).\n")
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(color = Color(0xFF424242))
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) { append("//En su version catalog\n \n") }
+                            append(
+                                "[versions]\n"+
+                                "navigationCompose = \"2.9.4\"\n" +
+                                        "\n" +
+                                        "[libraries]\n" +
+                                        "androidx-navigation-compose = { group = \"androidx.navigation\", name = \"navigation-compose\", version.ref = \"navigationCompose\" }\n"
+                            )
+                        },
+                        style = TextStyle(fontSize = 16.sp, color = Color.White)
+                    )
+                    }
+                Spacer(modifier = Modifier.height(8.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(color = Color(0xFF424242))
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = buildAnnotatedString {
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) { append("//En su build.gradle(app)\n \n") }
+                            append(
+                                "dependencies {\n"+
+                                        "implementation(libs.androidx.navigation.compose)\n"
+                                      )
+                        },
+                        style = TextStyle(fontSize = 16.sp, color = Color.White)
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
         )
     }
