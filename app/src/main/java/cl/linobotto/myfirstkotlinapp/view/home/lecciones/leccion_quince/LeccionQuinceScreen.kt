@@ -1,3 +1,4 @@
+/*
 package cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_quince
 
 import androidx.compose.foundation.Image
@@ -282,4 +283,4 @@ private fun CajaCodigo(codigo: String) {
             )
         )
     }
-}
+}*/
