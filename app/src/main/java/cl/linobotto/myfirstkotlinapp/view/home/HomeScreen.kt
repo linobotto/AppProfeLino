@@ -44,7 +44,7 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionOnce
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDoce
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionTrece
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionCatorce
-import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionQuince
+//import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionQuince
 
 @Preview(showBackground = true)
 @Composable
@@ -171,12 +171,12 @@ fun HomeScreen(
                 ) {
                     Text(text = "14. Validación dinámica (MVVM)")
                 }
-                Button(
+         /*       Button(
                     onClick = { navController.navigate(LeccionQuince) },
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "15. DataStore vs SharedPreferences y Room")
-                }
+                }*/
             }
         }
     }
