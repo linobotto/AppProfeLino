@@ -69,9 +69,7 @@ fun LeccionQuinceScreen(navController: NavController) {
                 painter = painterResource(id = R.drawable.kodee_waving),
                 contentDescription = null
             )
-            Spacer(modifier = Modifier.height(16.dp))
 
-            DemoPreferencias()
 
             SeccionExplicacionDataStore(navController= navController)
 
@@ -136,6 +134,9 @@ private fun SeccionExplicacionDataStore(navController: NavController) {
             .fillMaxWidth()
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
+
+        DemoPreferencias()
         Text(
             text = "¿Qué es DataStore?",
             style = MaterialTheme.typography.titleMedium
