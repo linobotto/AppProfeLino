@@ -13,3 +13,4 @@ data class HomeUiState(
     val isLoading: Boolean = false,
     val errorMessages: List<String> = emptyList()
 )
+

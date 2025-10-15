@@ -73,13 +73,9 @@ fun LeccionQuinceScreen(navController: NavController) {
 
             DemoPreferencias()
 
-            SeccionExplicacionDataStore()
+            SeccionExplicacionDataStore(navController= navController)
 
             Spacer(modifier = Modifier.height(24.dp))
-            Button(
-                onClick = { navController.navigate(Home) },
-                modifier = Modifier.fillMaxWidth(),
-            ) { Text(text = "Volver a las lecciones") }
         }
     }
 }
@@ -134,7 +130,7 @@ private fun RowAccionesUsuario(onSet: () -> Unit, onClear: () -> Unit) {
 }
 
 @Composable
-private fun SeccionExplicacionDataStore() {
+private fun SeccionExplicacionDataStore(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -261,6 +257,11 @@ private fun SeccionExplicacionDataStore() {
                 5) Si necesitas objetos tipados, evalúa Proto DataStore.
             """.trimIndent()
         )
+        Spacer(modifier = Modifier.height(24.dp))
+        Button(
+            onClick = { navController.navigate(Home) },
+            modifier = Modifier.fillMaxWidth(),
+        ) { Text(text = "Volver a las lecciones") }
     }
 }
 
