@@ -87,10 +87,6 @@ fun LeccionDieciseisScreen(navController: NavController) {
             ) {
                 SeccionExplicacionAnimaciones()
                 Spacer(modifier = Modifier.height(24.dp))
-                SeccionPasoAPasoLibreriasAnimacion()
-                Spacer(modifier = Modifier.height(24.dp))
-                SeccionTweenYSpring()
-                Spacer(modifier = Modifier.height(24.dp))
                 DemoAnimatedVisibility()
                 Spacer(modifier = Modifier.height(16.dp))
                 DemoAnimateFloatAsStateLike()
@@ -240,12 +236,12 @@ private fun SeccionExplicacionAnimaciones() {
     ) {
         Text(text = "¿Qué son las animaciones en Compose?", style = MaterialTheme.typography.titleMedium)
         Text(
-            text = "Compose anima valores de estado de forma declarativa. Cambias el estado, y la UI interpola entre el estado anterior y el nuevo usando especificaciones (tween, spring, keyframes).",
+            text = "Compose genera animaciones valores de estado de forma declarativa. Cambias el estado, y la UI interpola entre el estado anterior y el nuevo usando especificaciones (tween, spring, keyframes).",
             style = MaterialTheme.typography.bodyMedium
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        Text("APIs principales", style = MaterialTheme.typography.titleSmall)
+        Text("Propiedades principales", style = MaterialTheme.typography.titleSmall)
         Text(
             text = "• animate*AsState: anima un valor simple cuando su estado objetivo cambia.\n" +
                     "• updateTransition: coordina múltiples targets/propiedades.\n" +
@@ -254,6 +250,11 @@ private fun SeccionExplicacionAnimaciones() {
                     "• Crossfade: cambia entre pantallas/estados con desvanecido.",
             style = MaterialTheme.typography.bodyMedium
         )
+        Spacer(modifier = Modifier.height(24.dp))
+        SeccionPasoAPasoLibreriasAnimacion()
+        Spacer(modifier = Modifier.height(24.dp))
+        SeccionTweenYSpring()
+        Spacer(modifier = Modifier.height(24.dp))
 
         Spacer(modifier = Modifier.height(24.dp))
         Text("Ejemplo: animateFloatAsState (básico)", style = MaterialTheme.typography.titleMedium)
@@ -422,21 +423,7 @@ private fun SeccionPasoAPasoLibreriasAnimacion() {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text("2) Si NO usas Version Catalog", style = MaterialTheme.typography.titleSmall)
-        CajaCodigo(
-            codigo = """
-                // app/build.gradle.kts
-                dependencies {
-                    // BOM directo (elige una versión estable)
-                    implementation(platform("androidx.compose:compose-bom:2025.09.00"))
 
-                    implementation("androidx.compose.animation:animation")
-                    implementation("androidx.compose.animation:animation-graphics") // opcional
-                }
-            """.trimIndent()
-        )
-
-        Spacer(Modifier.height(12.dp))
         Text("3) (Opcional) Declara alias en libs.versions.toml", style = MaterialTheme.typography.titleSmall)
         CajaCodigo(
             codigo = """
@@ -448,7 +435,7 @@ private fun SeccionPasoAPasoLibreriasAnimacion() {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text("4) Sincroniza el proyecto e importa las APIs", style = MaterialTheme.typography.titleSmall)
+        Text("4) Sincroniza el proyecto e importa las Librerias", style = MaterialTheme.typography.titleSmall)
         CajaCodigo(
             codigo = """
                 import androidx.compose.animation.AnimatedVisibility
