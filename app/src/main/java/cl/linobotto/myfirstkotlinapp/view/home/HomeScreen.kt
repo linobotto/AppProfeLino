@@ -46,6 +46,7 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionTrece
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionCatorce
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionQuince
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciseis
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecisiete
 
 @Preview(showBackground = true)
 @Composable
@@ -183,6 +184,12 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "16. Animaciones en Compose")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionDiecisiete) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "17. YouTubePlayerView en Compose")
                 }
             }
         }
