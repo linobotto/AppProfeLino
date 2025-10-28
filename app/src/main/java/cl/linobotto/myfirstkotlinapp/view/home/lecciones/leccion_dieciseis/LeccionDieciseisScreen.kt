@@ -113,7 +113,7 @@ private fun SectionBox(title: String, content: @Composable () -> Unit) {
             .background(Color(0xFFEFF3F8))
             .padding(16.dp)
     ) {
-        Text(text = title, style = MaterialTheme.typography.titleMedium)
+        Text(text = title, style = MaterialTheme.typography.titleMedium, color = Color(0xFF1E1E1E))
         Spacer(modifier = Modifier.height(8.dp))
         content()
     }
@@ -128,7 +128,7 @@ private fun DemoAnimatedVisibility() {
                 Text(if (visible) "Ocultar" else "Mostrar")
             }
             Spacer(modifier = Modifier.width(12.dp))
-            Text("Toque el botón para alternar")
+            Text("Toque el botón para alternar", style = TextStyle(color = Color.DarkGray))
         }
         Spacer(modifier = Modifier.height(8.dp))
         AnimatedVisibility(visible = visible) {
@@ -140,7 +140,7 @@ private fun DemoAnimatedVisibility() {
                     .background(Color(0xFFBBDEFB)),
                 contentAlignment = Alignment.Center
             ) {
-                Text("¡Hola! Soy visible ✨")
+                Text("¡Hola! Soy visible ✨", style = TextStyle(color = Color.DarkGray))
             }
         }
     }
@@ -182,7 +182,7 @@ private fun DemoAnimateFloatAsStateLike() {
                     .rotate(rotation)
             )
         }
-        Text("Rotación infinita + cambio de tamaño al pulsar")
+        Text("Rotación infinita + cambio de tamaño al pulsar", style = TextStyle(color = Color.DarkGray))
     }
 }
 
@@ -205,7 +205,7 @@ private fun DemoInfiniteTransitionPulse() {
                 modifier = Modifier.size(96.dp).scale(scale)
             )
         }
-        Text("Animación continua usando rememberInfiniteTransition")
+        Text("Animación continua usando rememberInfiniteTransition", style = TextStyle(color = Color.DarkGray))
     }
 }
 
@@ -216,7 +216,7 @@ private fun DemoCrossfadeImages() {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Button(onClick = { first = !first }) { Text("Alternar") }
             Spacer(modifier = Modifier.width(12.dp))
-            Text("Desvanece entre recursos gráficos")
+            Text("Desvanece entre recursos gráficos", style = TextStyle(color = Color.DarkGray))
         }
         Spacer(modifier = Modifier.height(8.dp))
         Crossfade(targetState = first) { isFirst ->
@@ -342,7 +342,8 @@ private fun SeccionExplicacionAnimaciones() {
 @Composable
 private fun SeccionTweenYSpring() {
     SectionBox(title = "Tween vs Spring: ¿qué son y cuándo usarlos?") {
-        Text("tween: animación basada en tiempo (temporal)", style = MaterialTheme.typography.titleSmall)
+        Text("tween: animación basada en tiempo (temporal)", style = MaterialTheme.typography.titleSmall,
+            color = Color.DarkGray)
         Text(
             text = "Interpola del valor A al B en un tiempo fijo. Ideal para timings predecibles (lineales o con curvas de easing).",
             style = MaterialTheme.typography.bodyMedium
@@ -364,10 +365,12 @@ private fun SeccionTweenYSpring() {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text("spring: animación basada en física (muelle)", style = MaterialTheme.typography.titleSmall)
+        Text("spring: animación basada en física (muelle)", style = MaterialTheme.typography.titleSmall,
+            color = Color.DarkGray)
         Text(
             text = "No tiene duración fija; converge según parámetros físicos. Ideal para transiciones naturales con rebote o suavidad.",
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.DarkGray
         )
         Spacer(Modifier.height(8.dp))
         CajaCodigo(
@@ -385,7 +388,8 @@ private fun SeccionTweenYSpring() {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text("Comparación rápida", style = MaterialTheme.typography.titleSmall)
+        Text("Comparación rápida", style = MaterialTheme.typography.titleSmall,
+            color = Color.DarkGray)
         CajaCodigo(
             codigo = """
                 // AnimatedVisibility con distinta sensación
@@ -406,7 +410,8 @@ private fun SeccionTweenYSpring() {
 @Composable
 private fun SeccionPasoAPasoLibreriasAnimacion() {
     SectionBox(title = "Paso a paso: agregar librerías de animación") {
-        Text("1) Usa el BOM de Compose (recomendado)", style = MaterialTheme.typography.titleSmall)
+        Text("1) Usa el BOM de Compose (recomendado)", style = MaterialTheme.typography.titleSmall,
+            color = Color.DarkGray)
         CajaCodigo(
             codigo = """
                 // app/build.gradle.kts
@@ -424,7 +429,8 @@ private fun SeccionPasoAPasoLibreriasAnimacion() {
 
         Spacer(Modifier.height(12.dp))
 
-        Text("3) (Opcional) Declara alias en libs.versions.toml", style = MaterialTheme.typography.titleSmall)
+        Text("3) (Opcional) Declara alias en libs.versions.toml", style = MaterialTheme.typography.titleSmall,
+            color = Color.DarkGray)
         CajaCodigo(
             codigo = """
                 # gradle/libs.versions.toml
@@ -435,7 +441,8 @@ private fun SeccionPasoAPasoLibreriasAnimacion() {
         )
 
         Spacer(Modifier.height(12.dp))
-        Text("4) Sincroniza el proyecto e importa las Librerias", style = MaterialTheme.typography.titleSmall)
+        Text("4) Sincroniza el proyecto e importa las Librerias", style = MaterialTheme.typography.titleSmall,
+            color = Color.DarkGray)
         CajaCodigo(
             codigo = """
                 import androidx.compose.animation.AnimatedVisibility
@@ -449,7 +456,8 @@ private fun SeccionPasoAPasoLibreriasAnimacion() {
         Spacer(Modifier.height(8.dp))
         Text(
             text = "Con esto ya puedes usar AnimatedVisibility, Crossfade, animate*AsState, rememberInfiniteTransition, etc.",
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.DarkGray
         )
     }
 }

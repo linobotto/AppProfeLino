@@ -52,7 +52,7 @@ fun LeccionDiecisieteScreen(navController: NavController){
         ) {
             Text(
                 text = "Lección 17: YouTubePlayerView en Jetpack Compose",
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
             Image(
                 modifier = Modifier
@@ -65,7 +65,8 @@ fun LeccionDiecisieteScreen(navController: NavController){
             SectionBox(title = "¿Qué haremos?") {
                 Text(
                     text = "Integraremos un video de YouTube dentro de una pantalla Compose empleando AndroidView para alojar un YouTubePlayerView (de la librería AndroidYouTubePlayer). Es un enfoque similar a usar ExoPlayer, pero reutiliza una View clásica.",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.DarkGray,
                 )
             }
 
@@ -79,14 +80,14 @@ fun LeccionDiecisieteScreen(navController: NavController){
             Spacer(Modifier.height(12.dp))
 
             SectionBox(title = "Cómo agregar la librería") {
-                Text("1) En libs.versions.toml agrega la dependencia:", style = MaterialTheme.typography.bodyMedium)
+                Text("1) En libs.versions.toml agrega la dependencia:", style = MaterialTheme.typography.bodyMedium,color = Color.DarkGray)
                 CajaCodigo(
                     codigo = "[versions] \n" +
                             "youtubePlayer = \"13.0.0\"" +
                             "\n [libraries] \n" +
                             "android-youtube-player = { group = \"com.pierfrancescosoffritti.androidyoutubeplayer\", name = \"core\", version.ref = \"youtubePlayer\" }\n "
                 )
-                Text("2) En AndroidManifest.xml agrega el permiso de Internet:", style = MaterialTheme.typography.bodyMedium)
+                Text("2) En AndroidManifest.xml agrega el permiso de Internet:", style = MaterialTheme.typography.bodyMedium,color = Color.DarkGray)
                 CajaCodigo(codigo = "<uses-permission android:name=\"android.permission.INTERNET\" />")
             }
 
@@ -98,7 +99,8 @@ fun LeccionDiecisieteScreen(navController: NavController){
                             "2) Escuchamos onReady para cargar el video (loadVideo(videoId, 0f)).\n" +
                             "3) Usamos AndroidView para insertar la View clásica en Compose.\n" +
                             "4) Liberación de recursos: el propio YouTubePlayerView se maneja como LifecycleObserver.",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.DarkGray
                 )
             }
 
@@ -178,7 +180,7 @@ private fun SectionBox(title: String, content: @Composable () -> Unit) {
             .background(Color(0xFFEFF3F8))
             .padding(16.dp)
     ) {
-        Text(text = title, style = MaterialTheme.typography.titleMedium)
+        Text(text = title, style = MaterialTheme.typography.titleMedium, color = Color(0xFF1E1E1E))
         Spacer(modifier = Modifier.height(8.dp))
         content()
     }

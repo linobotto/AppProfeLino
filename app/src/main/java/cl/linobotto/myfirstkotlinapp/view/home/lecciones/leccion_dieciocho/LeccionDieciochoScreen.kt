@@ -85,7 +85,8 @@ fun LeccionDieciochoScreen(navController: NavController) {
             SectionBox(title = "¿Qué haremos?") {
                 Text(
                     text = "Aprenderás a reproducir un audio desde una URL y también sonidos locales (raw) usando MediaPlayer dentro de un Composable. Veremos cómo reproducir en segundo plano y cómo lanzar un sonido puntual con botón.",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = Color.DarkGray
                 )
             }
 
@@ -102,7 +103,8 @@ fun LeccionDieciochoScreen(navController: NavController) {
             Spacer(Modifier.height(12.dp))
 
             SectionBox(title = "Permisos necesarios") {
-                Text("Para audio local (carpeta raw) no se requieren permisos. Para audio por internet, asegúrate de tener en el AndroidManifest:", style = MaterialTheme.typography.bodyMedium)
+                Text("Para audio local (carpeta raw) no se requieren permisos. Para audio por internet, asegúrate de tener en el AndroidManifest:", style = MaterialTheme.typography.bodyMedium,
+                    color = Color.DarkGray)
                 CajaCodigo(codigo = "<uses-permission android:name=\"android.permission.INTERNET\" />")
             }
 
@@ -212,7 +214,7 @@ private fun SectionBox(title: String, content: @Composable () -> Unit) {
             .background(Color(0xFFEFF3F8))
             .padding(16.dp)
     ) {
-        Text(text = title, style = MaterialTheme.typography.titleMedium)
+        Text(text = title, style = MaterialTheme.typography.titleMedium, color = Color(0xFF1E1E1E))
         Spacer(modifier = Modifier.height(8.dp))
         content()
     }

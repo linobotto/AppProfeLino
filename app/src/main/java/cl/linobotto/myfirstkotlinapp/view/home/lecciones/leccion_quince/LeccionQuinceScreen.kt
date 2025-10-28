@@ -94,10 +94,10 @@ private fun DemoPreferencias() {
             .background(Color(0xFFEFF3F8))
             .padding(16.dp)
     ) {
-        Text(text = "Demo en vivo: Preferences DataStore", style = MaterialTheme.typography.titleMedium)
+        Text(text = "Demo en vivo: Preferences DataStore", style = MaterialTheme.typography.titleMedium,color = Color.DarkGray )
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(text = "Tema oscuro: ${'$'}temaOscuro")
+        Text(text = "Tema oscuro: ${'$'}temaOscuro", style = TextStyle(color = Color.DarkGray))
         Spacer(modifier = Modifier.height(8.dp))
         Switch(
             checked = temaOscuro,
@@ -107,7 +107,7 @@ private fun DemoPreferencias() {
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Username: " + (username ?: "<sin definir>"))
+        Text(text = "Username: " + (username ?: "<sin definir>"), style = TextStyle(color = Color.DarkGray))
         Spacer(modifier = Modifier.height(8.dp))
         RowAccionesUsuario(
             onSet = { scope.launch { repo.setUsername("Lino") } },
