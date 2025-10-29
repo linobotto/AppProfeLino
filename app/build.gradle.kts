@@ -71,6 +71,16 @@ dependencies {
     // YouTube Player (AndroidYouTubePlayer)
     implementation(libs.android.youtube.player)
 
+    // Ktor Client (HTTP)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.client.logging)
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+    // Coil (carga de imágenes)
+    implementation(libs.coil.compose)
+
     //Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

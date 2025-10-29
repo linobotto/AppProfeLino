@@ -49,6 +49,7 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciseis
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecisiete
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciocho
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecinueve
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeinte
 
 @Preview(showBackground = true)
 @Composable
@@ -204,6 +205,12 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "19. Intents: Maps, Tel y WhatsApp")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionVeinte) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "20. Consumo de API con Ktor (Batman)")
                 }
             }
         }
