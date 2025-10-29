@@ -48,6 +48,7 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionQuince
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciseis
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecisiete
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciocho
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecinueve
 
 @Preview(showBackground = true)
 @Composable
@@ -197,6 +198,12 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "18. Reproducir sonidos")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionDiecinueve) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "19. Intents: Maps, Tel y WhatsApp")
                 }
             }
         }
