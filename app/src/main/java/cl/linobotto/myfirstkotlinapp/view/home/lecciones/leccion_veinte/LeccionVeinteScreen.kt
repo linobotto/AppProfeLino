@@ -38,6 +38,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import cl.linobotto.myfirstkotlinapp.R
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
+import coil.request.CachePolicy
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -53,30 +54,30 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 @Serializable
-data class HeroSearchResponse(
-    val response: String? = null,
-    val results: List<HeroResult>? = null
-)
-
-@Serializable
-data class HeroResult(
-    val id: String? = null,
+data class PokemonResponse(
     val name: String? = null,
-    val image: HeroImage? = null,
-    val powerstats: PowerStats? = null
+    val id: Int? = null,
+    val sprites: Sprites? = null,
+    val height: Int? = null,
+    val weight: Int? = null,
+    val base_experience: Int? = null
 )
 
 @Serializable
-data class HeroImage(val url: String? = null)
+data class Sprites(
+    val front_default: String? = null,
+    val other: OtherSprites? = null
+)
 
 @Serializable
-data class PowerStats(
-    val intelligence: String? = null,
-    val strength: String? = null,
-    val speed: String? = null,
-    val durability: String? = null,
-    val power: String? = null,
-    val combat: String? = null
+data class OtherSprites(
+    @kotlinx.serialization.SerialName("official-artwork")
+    val official_artwork: OfficialArtwork? = null
+)
+
+@Serializable
+data class OfficialArtwork(
+    val front_default: String? = null
 )
 
 @Composable
@@ -84,7 +85,7 @@ fun LeccionVeinteScreen(navController: NavController) {
     var resultado by remember { mutableStateOf("") }
     var cargando by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
-    var heroe by remember { mutableStateOf<HeroResult?>(null) }
+    var pokemon by remember { mutableStateOf<PokemonResponse?>(null) }
 
     // Cliente Ktor básico para Android
     val client = remember {
@@ -128,7 +129,7 @@ fun LeccionVeinteScreen(navController: NavController) {
             Spacer(Modifier.height(12.dp))
             Image(
                 modifier = Modifier.fillMaxWidth(),
-                painter = painterResource(id = R.drawable.kodee_auto_fondo_wide),
+                painter = painterResource(id = R.drawable.kodee_office),
                 contentDescription = null
             )
             Spacer(Modifier.height(12.dp))
@@ -181,9 +182,9 @@ fun LeccionVeinteScreen(navController: NavController) {
 
             Spacer(Modifier.height(12.dp))
 
-            SectionBox(title = "Ejemplo práctico: Buscar \"Batman\" (SuperHero API)") {
+            SectionBox(title = "Ejemplo práctico: Buscar \"Pikachu\" (PokeAPI)") {
                 Text(
-                    text = "Necesitas un token gratuito de https://superheroapi.com/. Reemplaza TU_TOKEN_AQUI abajo.",
+                    text = "Usaremos la PokeAPI pública (sin token): https://pokeapi.co/. Consultaremos el Pokémon ‘Pikachu’.",
                     style = MaterialTheme.typography.bodySmall
                 )
                 Spacer(Modifier.height(8.dp))
@@ -194,24 +195,22 @@ fun LeccionVeinteScreen(navController: NavController) {
                         cargando = true
                         error = null
                         resultado = ""
-                        heroe = null
+                        pokemon = null
                         scope.launch(Dispatchers.IO) {
                             try {
-                                val token = "eba8c769a99b56f33f878449915e4ee3" // Reemplaza por tu token real de superheroapi.com
-                                val url = "https://superheroapi.com/api/$token/search/batman"
-                                val resp: HeroSearchResponse = client.get(url).body()
-                                val resultadoHeroe = resp.results?.firstOrNull()
-                                val nombre = resultadoHeroe?.name ?: "-"
-                                val imagen = resultadoHeroe?.image?.url ?: "-"
-                                val inteligencia = resultadoHeroe?.powerstats?.intelligence ?: "-"
-                                val fuerza = resultadoHeroe?.powerstats?.strength ?: "-"
+                                val url = "https://pokeapi.co/api/v2/pokemon/pikachu"
+                                val resp: PokemonResponse = client.get(url).body()
+                                val nombre = resp.name ?: "-"
+                                val imagen = resp.sprites?.other?.official_artwork?.front_default
+                                    ?: resp.sprites?.front_default
+                                    ?: "-"
                                 val texto = buildString {
                                     appendLine("Nombre: $nombre")
                                     appendLine("Imagen: $imagen")
-                                    appendLine("Powerstats: inteligencia=$inteligencia, fuerza=$fuerza")
+                                    appendLine("Altura: ${resp.height ?: 0} | Peso: ${resp.weight ?: 0}")
                                 }
                                 withContext(Dispatchers.Main) {
-                                    heroe = resultadoHeroe
+                                    pokemon = resp
                                     resultado = texto
                                     cargando = false
                                 }
@@ -223,17 +222,21 @@ fun LeccionVeinteScreen(navController: NavController) {
                             }
                         }
                     }
-                ) { Text(if (cargando) "Buscando..." else "Buscar Batman") }
+                ) { Text(if (cargando) "Buscando..." else "Buscar Pikachu") }
 
                 Spacer(Modifier.height(8.dp))
                 if (error != null) {
                     Text(text = "Error: ${'$'}error", color = MaterialTheme.colorScheme.error)
                 }
-                if (heroe != null) {
+                if (pokemon != null) {
                     Spacer(Modifier.height(8.dp))
+                    val imageUrl = pokemon?.sprites?.other?.official_artwork?.front_default
+                        ?: pokemon?.sprites?.front_default
+                        ?: ""
                     HeroCard(
-                        name = heroe?.name ?: "-",
-                        imageUrl = heroe?.image?.url.orEmpty()
+                        name = pokemon?.name ?: "-",
+                        imageUrl = imageUrl,
+                        id = pokemon?.id ?: 0
                     )
                 }
                 if (resultado.isNotBlank()) {
@@ -245,17 +248,28 @@ fun LeccionVeinteScreen(navController: NavController) {
                 CajaCodigo(
                     codigo = """
                         @Serializable
-                        data class HeroSearchResponse(val response: String? = null, val results: List<HeroResult>? = null)
+                        data class PokemonResponse(
+                            val name: String? = null,
+                            val sprites: Sprites? = null,
+                            val height: Int? = null,
+                            val weight: Int? = null,
+                            val base_experience: Int? = null
+                        )
                         @Serializable
-                        data class HeroResult(val id: String? = null, val name: String? = null, val image: HeroImage? = null, val powerstats: PowerStats? = null)
-                        @Serializable data class HeroImage(val url: String? = null)
-                        @Serializable data class PowerStats(val intelligence: String? = null, val strength: String? = null, val speed: String? = null,
-                            val durability: String? = null, val power: String? = null, val combat: String? = null)
+                        data class Sprites(
+                            val front_default: String? = null,
+                            val other: OtherSprites? = null
+                        )
+                        @Serializable
+                        data class OtherSprites(
+                            @kotlinx.serialization.SerialName("official-artwork")
+                            val official_artwork: OfficialArtwork? = null
+                        )
+                        @Serializable
+                        data class OfficialArtwork(val front_default: String? = null)
                         
-                        suspend fun buscarBatman(client: HttpClient, token: String): HeroResult? {
-                            val url = "https://superheroapi.com/api/${'$'}token/search/batman"
-                            val resp: HeroSearchResponse = client.get(url).body()
-                            return resp.results?.firstOrNull()
+                        suspend fun buscarPikachu(client: HttpClient): PokemonResponse {
+                            return client.get("https://pokeapi.co/api/v2/pokemon/pikachu").body()
                         }
                     """.trimIndent()
                 )
@@ -268,9 +282,9 @@ fun LeccionVeinteScreen(navController: NavController) {
                     codigo = """
                         // 1) Nunca llames APIs en el hilo principal: usa corrutinas (Dispatchers.IO)
                         // 2) Maneja excepciones (try/catch) y estados de carga/errores en UI
-                        // 3) Mantén el token fuera del código (BuildConfig, EncryptedSharedPreferences, etc.)
+                        // 3) Para APIs públicas (como PokeAPI) maneja límites de rate y backoff exponencial
                         // 4) Usa ViewModel + scope para cancelar llamadas si la pantalla se destruye
-                        // 5) Respeta límites de rate y maneja códigos HTTP
+                        // 5) Valida conectividad y muestra mensajes de error amigables
                     """.trimIndent()
                 )
             }
@@ -318,7 +332,7 @@ private fun CajaCodigo(codigo: String) {
 }
 
 @Composable
-private fun HeroCard(name: String, imageUrl: String) {
+private fun HeroCard(name: String, imageUrl: String, id: Int) {
     val context = LocalContext.current
     // Si la URL viene con http, intentamos forzar https (muchos hosts lo soportan)
     val imageUrlToLoad = remember(imageUrl) {
@@ -354,12 +368,15 @@ private fun HeroCard(name: String, imageUrl: String) {
         } else {
             AsyncImage(
                 model = coil.request.ImageRequest.Builder(context)
-                    .data(imageUrlToLoad)
+                    .data("https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/${id}.png")
+                    .setHeader("User-Agent", "Mozilla/5.0 (Android 11; Mobile; rv:89.0)")
                     .crossfade(true)
+                    .diskCachePolicy(CachePolicy.ENABLED)
+                    .memoryCachePolicy(CachePolicy.ENABLED)
                     .build(),
                 contentDescription = name,
                 contentScale = ContentScale.Crop,
-                placeholder = painterResource(id = R.drawable.kodee_regular),
+                placeholder = painterResource(id = R.drawable.poke_ball),
                 // Usamos un recurso distinto para error para distinguirlo del placeholder
                 error = painterResource(id = R.drawable.kodee_scream),
                 onError = { state ->

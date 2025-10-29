@@ -210,7 +210,7 @@ fun HomeScreen(
                     onClick = { navController.navigate(LeccionVeinte) },
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Text(text = "20. Consumo de API con Ktor (Batman)")
+                    Text(text = "20. Consumo de API con Ktor (PokeAPI)")
                 }
             }
         }
