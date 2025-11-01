@@ -1,4 +1,4 @@
-package cl.linobotto.myfirstkotlinapp.view.home.lecciones
+package cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_trece
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,9 +32,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import cl.linobotto.myfirstkotlinapp.R
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionTrece
@@ -43,11 +43,11 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionTreceDetalle
 @Preview(showBackground = true, heightDp = 2000)
 @Composable
 fun LeccionTrecePreview() {
-    LeccionTreceScreen(navController = rememberNavController())
+    LeccionTreceScreen(navController = rememberNavController(), vm = LeccionTreceViewModel())
 }
 
 @Composable
-fun LeccionTreceScreen(navController: NavController) {
+fun LeccionTreceScreen(navController: NavController, vm: LeccionTreceViewModel = viewModel()) {
     Scaffold { padding ->
         Column(
             modifier = Modifier

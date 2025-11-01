@@ -1,4 +1,4 @@
-package cl.linobotto.myfirstkotlinapp.view.home.lecciones
+package cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_doce
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +31,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
@@ -38,11 +39,11 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
 @Preview(showBackground = true)
 @Composable
 fun LeccionDocePreview() {
-    LeccionDoceScreen(navController = rememberNavController())
+    LeccionDoceScreen(navController = rememberNavController(), vm = LeccionDoceViewModel())
 }
 
 @Composable
-fun LeccionDoceScreen(navController: NavController) {
+fun LeccionDoceScreen(navController: NavController, vm: LeccionDoceViewModel = viewModel()) {
     Scaffold { padding ->
         Column(
             modifier = Modifier

@@ -33,12 +33,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import cl.linobotto.myfirstkotlinapp.R
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
 
 @Composable
-fun LeccionDieciochoScreen(navController: NavController) {
+fun LeccionDieciochoScreen(navController: NavController, vm: LeccionDieciochoViewModel = viewModel()) {
     // Reproducir localSound (terror.mp3) de fondo automáticamente
     val context = LocalContext.current
     val backgroundPlayer = remember {

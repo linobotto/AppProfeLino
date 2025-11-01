@@ -35,6 +35,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cl.linobotto.myfirstkotlinapp.R
@@ -44,11 +45,11 @@ import cl.linobotto.myfirstkotlinapp.data.datastore.PreferencesRepository
 @Preview(showBackground = true)
 @Composable
 fun LeccionQuincePreview() {
-    LeccionQuinceScreen(navController = rememberNavController())
+    LeccionQuinceScreen(navController = rememberNavController(), vm = LeccionQuinceViewModel())
 }
 
 @Composable
-fun LeccionQuinceScreen(navController: NavController) {
+fun LeccionQuinceScreen(navController: NavController, vm: LeccionQuinceViewModel = viewModel()) {
     Scaffold { padding ->
         Column(
             modifier = Modifier
@@ -97,7 +98,7 @@ private fun DemoPreferencias() {
         Text(text = "Demo en vivo: Preferences DataStore", style = MaterialTheme.typography.titleMedium,color = Color.DarkGray )
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(text = "Tema oscuro: ${'$'}temaOscuro", style = TextStyle(color = Color.DarkGray))
+        Text(text = "Tema oscuro: ${temaOscuro}", style = TextStyle(color = Color.DarkGray))
         Spacer(modifier = Modifier.height(8.dp))
         Switch(
             checked = temaOscuro,

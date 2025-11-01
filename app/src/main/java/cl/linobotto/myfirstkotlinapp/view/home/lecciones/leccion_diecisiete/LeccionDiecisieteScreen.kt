@@ -29,6 +29,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import cl.linobotto.myfirstkotlinapp.R
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
@@ -39,7 +40,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFram
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 @Composable
-fun LeccionDiecisieteScreen(navController: NavController){
+fun LeccionDiecisieteScreen(navController: NavController, vm: LeccionDiecisieteViewModel = viewModel()){
     Scaffold { padding ->
         Column(
             modifier = Modifier

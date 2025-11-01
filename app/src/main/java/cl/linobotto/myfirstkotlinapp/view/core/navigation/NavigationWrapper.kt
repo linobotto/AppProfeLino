@@ -16,11 +16,11 @@ import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionSeisScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionSieteScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionOchoScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_nueve.LeccionNueveScreen
-import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionDiezScreen
-import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionOnceScreen
-import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionDoceScreen
-import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionTreceScreen
-import cl.linobotto.myfirstkotlinapp.view.home.lecciones.LeccionTreceDetalleScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_diez.LeccionDiezScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_once.LeccionOnceScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_doce.LeccionDoceScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_trece.LeccionTreceScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_trece.LeccionTreceDetalleScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_catorce.LeccionCatorceScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_quince.LeccionQuinceScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_dieciseis.LeccionDieciseisScreen

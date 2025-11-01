@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cl.linobotto.myfirstkotlinapp.R
@@ -53,11 +54,11 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
 @Preview(showBackground = true)
 @Composable
 fun LeccionDieciseisPreview() {
-    LeccionDieciseisScreen(navController = rememberNavController())
+    LeccionDieciseisScreen(navController = rememberNavController(), vm = LeccionDieciseisViewModel())
 }
 
 @Composable
-fun LeccionDieciseisScreen(navController: NavController) {
+fun LeccionDieciseisScreen(navController: NavController, vm: LeccionDieciseisViewModel = viewModel()) {
     Scaffold { padding ->
         Column(
             modifier = Modifier
