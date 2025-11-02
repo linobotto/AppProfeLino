@@ -50,6 +50,7 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecisiete
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciocho
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecinueve
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeinte
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintidos
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintiuno
 
 @Preview(showBackground = true)
@@ -218,6 +219,12 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "21. Corrutinas e hilos")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionVeintidos) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "22. Ciclos de vida app")
                 }
             }
         }

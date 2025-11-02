@@ -28,6 +28,7 @@ import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_diecisiete.Lecc
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_dieciocho.LeccionDieciochoScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_diecinueve.LeccionDiecinueveScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_veinte.LeccionVeinteScreen
+import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_veintidos.LeccionVeintidosScreen
 import cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_veintiuno.LeccionVeintiunoScreen
 
 @Composable
@@ -149,6 +150,11 @@ fun NavigationWrapper(){
         }
         composable <LeccionVeintiuno>{
             LeccionVeintiunoScreen(
+                navController = navController
+            )
+        }
+        composable <LeccionVeintidos>{
+            LeccionVeintidosScreen(
                 navController = navController
             )
         }
