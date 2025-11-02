@@ -50,6 +50,7 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecisiete
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciocho
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecinueve
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeinte
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintiuno
 
 @Preview(showBackground = true)
 @Composable
@@ -211,6 +212,12 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "20. Consumo de API con Ktor (PokeAPI)")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionVeintiuno) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "21. Corrutinas e hilos")
                 }
             }
         }

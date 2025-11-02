@@ -19,10 +19,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,80 +34,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import cl.linobotto.myfirstkotlinapp.R
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
 import coil.request.CachePolicy
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.android.Android
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.request.get
-import io.ktor.client.call.body
-import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 
-@Serializable
-data class PokemonResponse(
-    val name: String? = null,
-    val id: Int? = null,
-    val sprites: Sprites? = null,
-    val height: Int? = null,
-    val weight: Int? = null,
-    val base_experience: Int? = null
-)
-
-@Serializable
-data class Sprites(
-    val front_default: String? = null,
-    val other: OtherSprites? = null
-)
-
-@Serializable
-data class OtherSprites(
-    @kotlinx.serialization.SerialName("official-artwork")
-    val official_artwork: OfficialArtwork? = null
-)
-
-@Serializable
-data class OfficialArtwork(
-    val front_default: String? = null
-)
 
 @Composable
-fun LeccionVeinteScreen(navController: NavController) {
-    var resultado by remember { mutableStateOf("") }
-    var cargando by remember { mutableStateOf(false) }
-    var error by remember { mutableStateOf<String?>(null) }
-    var pokemon by remember { mutableStateOf<PokemonResponse?>(null) }
-
-    // Cliente Ktor básico para Android
-    val client = remember {
-        HttpClient(Android) {
-            install(ContentNegotiation) {
-                json(
-                    Json {
-                        ignoreUnknownKeys = true
-                        prettyPrint = true
-                    }
-                )
-            }
-            install(Logging) {
-                level = LogLevel.BODY
-            }
-            install(io.ktor.client.plugins.HttpTimeout) {
-                requestTimeoutMillis = 15000
-            }
-        }
-    }
-
-    val scope = rememberCoroutineScope()
+fun LeccionVeinteScreen(navController: NavController, viewModel: LeccionVeinteViewModel = viewModel()) {
+    val uiState by viewModel.uiState.collectAsState()
 
     Scaffold { padding ->
         Column(
@@ -182,66 +119,35 @@ fun LeccionVeinteScreen(navController: NavController) {
 
             Spacer(Modifier.height(12.dp))
 
-            SectionBox(title = "Ejemplo práctico: Buscar \"Pikachu\" (PokeAPI)") {
+            SectionBox(title = "Ejemplo práctico: Buscar Pikachu (PokeAPI)") {
                 Text(
                     text = "Usaremos la PokeAPI pública (sin token): https://pokeapi.co/. Consultaremos el Pokémon ‘Pikachu’.",
                     style = MaterialTheme.typography.bodySmall
                 )
                 Spacer(Modifier.height(8.dp))
                 Button(
-                    enabled = !cargando,
-                    onClick = {
-                        // Llamada simple usando Ktor desde un hilo de suspensión
-                        cargando = true
-                        error = null
-                        resultado = ""
-                        pokemon = null
-                        scope.launch(Dispatchers.IO) {
-                            try {
-                                val url = "https://pokeapi.co/api/v2/pokemon/pikachu"
-                                val resp: PokemonResponse = client.get(url).body()
-                                val nombre = resp.name ?: "-"
-                                val imagen = resp.sprites?.other?.official_artwork?.front_default
-                                    ?: resp.sprites?.front_default
-                                    ?: "-"
-                                val texto = buildString {
-                                    appendLine("Nombre: $nombre")
-                                    appendLine("Imagen: $imagen")
-                                    appendLine("Altura: ${resp.height ?: 0} | Peso: ${resp.weight ?: 0}")
-                                }
-                                withContext(Dispatchers.Main) {
-                                    pokemon = resp
-                                    resultado = texto
-                                    cargando = false
-                                }
-                            } catch (e: Exception) {
-                                withContext(Dispatchers.Main) {
-                                    error = e.message
-                                    cargando = false
-                                }
-                            }
-                        }
-                    }
-                ) { Text(if (cargando) "Buscando..." else "Buscar Pikachu") }
+                    enabled = !uiState.cargando,
+                    onClick = { viewModel.buscarPokemon() }
+                ) { Text(if (uiState.cargando) "Buscando..." else "Buscar Pikachu") }
 
                 Spacer(Modifier.height(8.dp))
-                if (error != null) {
-                    Text(text = "Error: ${'$'}error", color = MaterialTheme.colorScheme.error)
+                if (uiState.error != null) {
+                    Text(text = "Error: ${uiState.error}", color = MaterialTheme.colorScheme.error)
                 }
-                if (pokemon != null) {
+                if (uiState.pokemon != null) {
                     Spacer(Modifier.height(8.dp))
-                    val imageUrl = pokemon?.sprites?.other?.official_artwork?.front_default
-                        ?: pokemon?.sprites?.front_default
+                    val imageUrl = uiState.pokemon?.sprites?.other?.official_artwork?.front_default
+                        ?: uiState.pokemon?.sprites?.front_default
                         ?: ""
                     HeroCard(
-                        name = pokemon?.name ?: "-",
+                        name = uiState.pokemon?.name ?: "-",
                         imageUrl = imageUrl,
-                        id = pokemon?.id ?: 0
+                        id = uiState.pokemon?.id ?: 0
                     )
                 }
-                if (resultado.isNotBlank()) {
+                if (uiState.resultado.isNotBlank()) {
                     Spacer(Modifier.height(8.dp))
-                    CajaCodigo(codigo = resultado)
+                    CajaCodigo(codigo = uiState.resultado)
                 }
 
                 Spacer(Modifier.height(8.dp))
@@ -270,6 +176,21 @@ fun LeccionVeinteScreen(navController: NavController) {
                         
                         suspend fun buscarPikachu(client: HttpClient): PokemonResponse {
                             return client.get("https://pokeapi.co/api/v2/pokemon/pikachu").body()
+                        }
+                    """.trimIndent()
+                )
+
+                Spacer(Modifier.height(8.dp))
+                CajaCodigo(
+                    codigo = """
+                        // En LeccionVeinteViewModel.kt se llama así:
+                        viewModelScope.launch {
+                            try {
+                                val resp: PokemonResponse = client.get(url).body()
+                                // ... usar 'resp' para actualizar el estado
+                            } catch (e: Exception) {
+                                // ... manejar error
+                            }
                         }
                     """.trimIndent()
                 )
@@ -378,39 +299,7 @@ private fun HeroCard(name: String, imageUrl: String, id: Int) {
                 contentScale = ContentScale.Crop,
                 placeholder = painterResource(id = R.drawable.poke_ball),
                 // Usamos un recurso distinto para error para distinguirlo del placeholder
-                error = painterResource(id = R.drawable.kodee_scream),
-                onError = { state ->
-                    loadError = state.result.throwable.message
-                },
-                onSuccess = {
-                    loadError = null
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(220.dp)
-            )
-        }
-        Text(
-            text = name,
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(12.dp)
-        )
-        Text(
-            text = imageUrlToLoad,
-            style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.padding(horizontal = 12.dp)
-        )
-        if (loadError != null) {
-            Text(
-                text = "Error cargando imagen: ${loadError}",
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(12.dp)
-            )
-            Text(
-                text = "Sugerencia: verifica conexión. Si la URL es http, habilita https o permite cleartext.",
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
+                error = painterResource(id = R.drawable.error_placeholder)
             )
         }
     }
