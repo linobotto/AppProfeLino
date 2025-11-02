@@ -2,7 +2,9 @@ package cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_veintidos
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,10 +19,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -68,13 +76,45 @@ fun LeccionVeintidosScreen(
 
             }
             Spacer(Modifier.height(12.dp))
-            Image(
+
+            var scale by remember { mutableStateOf(1f) }
+            var offsetX by remember { mutableStateOf(0f) }
+            var offsetY by remember { mutableStateOf(0f) }
+
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier = Modifier
+                    .clip(RoundedCornerShape(12.dp))
                     .fillMaxWidth()
-                    .height(513.dp),
-                painter = painterResource(id = R.drawable.activity_lifecycle),
-                contentDescription = "Diagrama del ciclo de vida de una Activity"
-            )
+                    .height(513.dp)
+                    .background(Color.White)
+                    .pointerInput(Unit) {
+                        detectTransformGestures { _, pan, zoom, _ ->
+                            scale = (scale * zoom).coerceIn(1f, 4f)
+                            if (scale > 1f) {
+                                offsetX += pan.x
+                                offsetY += pan.y
+                            } else {
+                                offsetX = 0f
+                                offsetY = 0f
+                            }
+                        }
+                    }
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.activity_lifecycle),
+                    contentDescription = "Diagrama del ciclo de vida de una Activity (pellizcar para hacer zoom)",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .graphicsLayer(
+                            scaleX = scale,
+                            scaleY = scale,
+                            translationX = offsetX,
+                            translationY = offsetY
+                        )
+                )
+            }
+
             Spacer(Modifier.height(12.dp))
 
             SectionBox(title = "onCreate()") {
