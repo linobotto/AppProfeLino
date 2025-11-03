@@ -51,7 +51,9 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDieciocho
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionDiecinueve
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeinte
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintidos
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintitres
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintiuno
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeinticuatro
 
 @Preview(showBackground = true)
 @Composable
@@ -225,6 +227,18 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "22. Ciclos de vida app")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionVeintitres) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "23. ProgressBar y Switch")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionVeinticuatro) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "24. Sliders")
                 }
             }
         }
