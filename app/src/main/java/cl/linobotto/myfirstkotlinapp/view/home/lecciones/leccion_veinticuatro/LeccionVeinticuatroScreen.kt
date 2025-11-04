@@ -1,5 +1,6 @@
 package cl.linobotto.myfirstkotlinapp.view.home.lecciones.leccion_veinticuatro
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,11 +25,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import cl.linobotto.myfirstkotlinapp.R
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.Home
 import java.text.DecimalFormat
 
@@ -54,6 +57,12 @@ fun LeccionVeinticuatroScreen(navController: NavController, viewModel: LeccionVe
                 textAlign = TextAlign.Center
             )
 
+            Spacer(Modifier.height(16.dp))
+            Image(
+                modifier = Modifier.height(100.dp),
+                painter = painterResource(id = R.drawable.kodee_slide),
+                contentDescription = "Imagen de personaje sosteniendo un slider",
+            )
             Spacer(Modifier.height(16.dp))
 
             SectionBox(title = "Slider (Continuo)") {
