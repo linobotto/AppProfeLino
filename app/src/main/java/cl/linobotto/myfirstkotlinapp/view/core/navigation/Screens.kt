@@ -81,4 +81,14 @@ data class LeccionTreceDetalle(val nombre: String, val edad: Int)
 @Serializable
  data object LeccionVeinticuatro
 
+@Serializable
+ data object LeccionVeinticinco
 
+@Serializable
+ data object LeccionVeintiseis
+
+@Serializable
+ data object LeccionVeintisiete
+
+@Serializable
+ data object LeccionVeintiocho

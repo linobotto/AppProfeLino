@@ -80,6 +80,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     // Coil (carga de imágenes)
     implementation(libs.coil.compose)
+    
+    // ZXing (QR Scanner)
+    implementation(libs.zxing.android.embedded)
 
     //Testing
     testImplementation(libs.junit)

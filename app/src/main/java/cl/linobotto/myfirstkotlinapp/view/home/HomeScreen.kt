@@ -54,6 +54,10 @@ import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintidos
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintitres
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintiuno
 import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeinticuatro
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeinticinco
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintiseis
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintisiete
+import cl.linobotto.myfirstkotlinapp.view.core.navigation.LeccionVeintiocho
 
 @Preview(showBackground = true)
 @Composable
@@ -239,6 +243,30 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(text = "24. Sliders")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionVeinticinco) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "25. Permisos y Características")
+                }
+                 Button(
+                    onClick = { navController.navigate(LeccionVeintiseis) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "26. Hardware: Escáner QR")
+                }
+                Button(
+                    onClick = { navController.navigate(LeccionVeintisiete) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "27. AlertDialog")
+                }
+                 Button(
+                    onClick = { navController.navigate(LeccionVeintiocho) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(text = "28. Listas con LazyColumn")
                 }
             }
         }
